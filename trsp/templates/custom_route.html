@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Route Page</title>
+</head>
+<body>
+    <h1>Custom Route Page</h1>
+    <form method="post" action="{{ url_for('custom_route') }}">
+        <label for="stop1">Select Stop 1:</label>
+        <select name="stop1" id="stop1">
+            {% for stop in stops %}
+                <option value="{{ stop }}">{{ stop }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="stop2">Select Stop 2:</label>
+        <select name="stop2" id="stop2">
+            {% for stop in stops %}
+                <option value="{{ stop }}">{{ stop }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="no_of_stops">Select Number of Stops:</label>
+        <select name="no_of_stops" id="no_of_stops">
+            {% for i in range(1, max_stops+1) %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" value="Generate Map">
+    </form>
+    <!-- Include the generated Folium map HTML file -->
+    {% if request.method == 'POST' %}
+        {% include 'custom_route_map.html' %}
+    {% endif %}
+</body>
+</html>
